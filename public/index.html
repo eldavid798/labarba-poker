@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La Barba Poker Room</title>
 <script src="/socket.io/socket.io.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -16,11 +16,12 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);font-family:'Rajdhani',sans-serif;color:var(--text);
-     min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+     height:100dvh;max-height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+html{height:100dvh}
 
 /* ── LOBBY ── */
 #lobby{display:flex;flex-direction:column;align-items:center;justify-content:center;
-       height:100vh;gap:20px}
+       height:100dvh;gap:20px}
 #lobby h1{font-family:'Bebas Neue';font-size:48px;letter-spacing:6px;
           color:var(--green-bright);text-shadow:0 0 20px #00e67660}
 #lobby input{background:#1a2e1a;border:1px solid #2a4a2a;color:var(--text);
@@ -50,11 +51,11 @@ body{background:var(--bg);font-family:'Rajdhani',sans-serif;color:var(--text);
 #room-code-badge:hover{background:#2a4a2a}
 
 /* ── GAME AREA ── */
-#game{display:none;flex:1;flex-direction:column;overflow:hidden}
+#game{display:none;flex:1;flex-direction:column;overflow:hidden;height:0}
 
 /* TABLE */
-#game-area{flex:1;display:flex;align-items:center;justify-content:center;padding:8px}
-.table-wrap{position:relative;width:min(94vw,420px);aspect-ratio:.62}
+#game-area{flex:1;display:flex;align-items:center;justify-content:center;padding:4px;overflow:hidden;min-height:0}
+.table-wrap{position:relative;width:min(86vw,340px);aspect-ratio:.62;flex-shrink:0}
 .table-bg{position:absolute;inset:0;border-radius:50%;
   background:radial-gradient(ellipse at 50% 40%,#175c35 0%,#0d4a26 50%,#073d1f 100%);
   box-shadow:0 0 0 8px #111,0 0 0 14px #1e3a1e,0 0 0 18px #0a140a,
@@ -159,14 +160,15 @@ body{background:var(--bg);font-family:'Rajdhani',sans-serif;color:var(--text);
 .start-btn:disabled{opacity:.4;cursor:not-allowed}
 
 /* ── ACTION AREA ── */
-#action-area{flex-shrink:0;background:#050805;border-top:1px solid #1a2e1a;padding:8px 12px 10px}
-.hero-hand{display:flex;justify-content:center;gap:8px;margin-bottom:8px}
-.hero-hand .card{width:40px;height:58px;font-size:15px;border-radius:6px}
-.hero-hand .card-rank{font-size:17px}
-.hero-hand .card-suit{font-size:14px}
-.action-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
-.action-btn{padding:10px 4px;border:none;border-radius:8px;
-            font-family:'Bebas Neue';font-size:17px;letter-spacing:1.5px;cursor:pointer;transition:all .1s}
+#action-area{flex-shrink:0;background:#050805;border-top:1px solid #1a2e1a;padding:6px 10px 8px;
+             padding-bottom:max(8px, env(safe-area-inset-bottom))}
+.hero-hand{display:flex;justify-content:center;gap:6px;margin-bottom:6px}
+.hero-hand .card{width:34px;height:48px;font-size:13px;border-radius:5px}
+.hero-hand .card-rank{font-size:14px}
+.hero-hand .card-suit{font-size:12px}
+.action-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
+.action-btn{padding:8px 4px;border:none;border-radius:8px;
+            font-family:'Bebas Neue';font-size:16px;letter-spacing:1.5px;cursor:pointer;transition:all .1s}
 .action-btn:active{transform:scale(.96)}
 .action-btn:disabled{opacity:.35;cursor:not-allowed}
 .btn-fold{background:linear-gradient(180deg,#c62828,#8b0000);color:#fff}
@@ -245,7 +247,7 @@ body{background:var(--bg);font-family:'Rajdhani',sans-serif;color:var(--text);
   <div id="game-area">
     <div class="table-wrap" id="table-wrap">
       <div class="table-bg"></div>
-      <img src="/imgs/barbas_logo.png" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:350px;opacity:0.35;pointer-events:none;filter:invert(1) brightness(2);" />
+      <img src="/imgs/barbas_logo.png" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:150px;opacity:0.15;pointer-events:none;filter:invert(1) brightness(2);" />
 
       <div class="community-cards" id="community-cards"></div>
 
